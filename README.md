@@ -12,7 +12,7 @@ The Taste of the World Café debuted a new menu at the start of the year. As the
 
 ## Case Study questions
 
-OBJECTIVE 1
+### Objective 1
 
 1. How many Italian dishes are on the menu?
 
@@ -43,11 +43,12 @@ GROUP BY category;
 4. Wha is the average dish price within each category?
 
 ```sql
-SELECT category, AVG(price) AS avg_price FROM menu_items
+SELECT category, AVG(price) AS avg_price
+FROM menu_items
 GROUP BY category;
 ```
 
-OBJECTIVE 2
+### Objective 2
 
 5. What is the date range of the table?
 
@@ -85,9 +86,63 @@ HAVING num_items >12
 ;
 ```
 
+### Objective 3
 
+9. What were the least and most ordered items? What categories were they in?
 
+ ```sql
+SELECT item_name, category, COUNT(order_details_id) AS num_purchases
+FROM menu_items AS m
+JOIN order_details AS o ON
+m.menu_item_id=o.item_id
+GROUP BY category, item_name
+ORDER BY  num_purchases DESC;
+ ```
 
+10. What were the top 5 orders that spent the most money?
+
+```sql
+SELECT order_id, SUM(price) AS total_spend
+FROM menu_items AS m
+JOIN order_details AS o ON
+m.menu_item_id=o.item_id
+GROUP BY order_id
+ORDER BY total_spend DESC
+LIMIT 5;
+```
+
+11. View the details of the highest spend order.
+
+```sql
+SELECT category, COUNT(item_id) AS num_items
+FROM menu_items AS m
+JOIN order_details AS o ON
+m.menu_item_id=o.item_id
+WHERE order_id =440
+GROUP BY category; 
+```
+
+12. View the details of the top 5 highest spend orders.
+
+```sql
+SELECT order_id, category, COUNT(item_id) AS num_items
+FROM menu_items AS m
+JOIN order_details AS o ON
+m.menu_item_id=o.item_id
+WHERE order_id  IN (440,2075,1957,330,2675)
+GROUP BY order_id, category;
+```
+
+## Recommendations
+
+- Chicken tacos is not that popular, so marketing should be done to promote it.
+- Hamburger is very popular, it should definitely remain on the menu_items.
+- The most ordered items are mostly American and Asian items, while Mexican foods are least ordered. Keep the American and Asian foods in  stock, while actively promoting Mexican foods.
+- The highest spend order was mostly on Italian food, so it should remain on the menu.
+
+## Data source
+
+[Maven Analytics](https://mavenanalytics.com)
 
 
 
