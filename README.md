@@ -6,7 +6,7 @@ The Taste of the World Café debuted a new menu at the start of the year. As the
 
 ## Objectives
 
-1.	Explore the meu_items table to get an idea of what’s on the new menu
+1.	Explore the menu_items table to get an idea of what’s on the new menu
 2.	Explore the order_details table to get an idea of the data that’s been collected
 3.	Use both tables to understand how customers are reacting to the new menu.
 
